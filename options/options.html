@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShieldLens Settings & Privacy Control</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">🛡️</div>
+        <div>
+          <h1 class="logo-title">SHIELDLENS</h1>
+          <div class="logo-subtitle">Settings & Control Center</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="tab-settings">
+          <span>⚙️</span> Module Configuration
+        </button>
+        <button class="nav-item" data-tab="tab-whitelist">
+          <span>🛡️</span> Domain Whitelist
+        </button>
+        <button class="nav-item" data-tab="tab-privacy">
+          <span>🔒</span> Privacy & Data Control
+        </button>
+        <button class="nav-item" data-tab="tab-logs">
+          <span>📋</span> Security Activity Logs
+        </button>
+      </nav>
+
+      <div class="version-badge">Version 1.0.0 (MV3)</div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Section 1: Settings -->
+      <section id="tab-settings" class="tab-page active">
+        <div class="page-header">
+          <h2>Module Configuration & Risk Thresholds</h2>
+          <p>Customize detection sensitivity and automated protection policies.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Detection Timings & Windows</h3>
+          
+          <div class="form-group">
+            <label for="hover-delay">HoverGuard Delay (ms): <span id="val-hover-delay">150</span>ms</label>
+            <input type="range" id="hover-delay" min="50" max="500" step="25" value="150">
+            <div class="help-text">Debounce interval before link hover analysis begins. Prevents lag during rapid mouse movement.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="intent-window">Download Intent Window (seconds): <span id="val-intent-window">5</span>s</label>
+            <input type="range" id="intent-window" min="1" max="10" step="1" value="5">
+            <div class="help-text">Maximum time window to correlate a user click gesture with an initiated file download.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Enforcement Policies</h3>
+          
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="chk-auto-block">
+              <span>Automatically Pause High-Risk Downloads</span>
+            </label>
+            <div class="help-text">When enabled, downloads categorized as HIGH RISK will be automatically held until explicit user approval.</div>
+          </div>
+
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="chk-notifications" checked>
+              <span>Enable System Desktop Notifications</span>
+            </label>
+            <div class="help-text">Receive desktop alerts when high-risk mismatches or drive-by downloads occur.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Whitelist -->
+      <section id="tab-whitelist" class="tab-page">
+        <div class="page-header">
+          <h2>Trusted Domain Whitelist</h2>
+          <p>Links and downloads from whitelisted domains bypass elevated risk warnings.</p>
+        </div>
+
+        <div class="card">
+          <div class="add-whitelist-row">
+            <input type="text" id="input-whitelist-domain" placeholder="e.g. internal-portal.company.com" class="text-input">
+            <button id="btn-add-whitelist" class="btn btn-primary">Add Domain</button>
+          </div>
+
+          <ul id="whitelist-items" class="whitelist-list">
+            <!-- Dynamic whitelist items -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 3: Privacy & Security -->
+      <section id="tab-privacy" class="tab-page">
+        <div class="page-header">
+          <h2>Privacy Model & Data Control</h2>
+          <p>ShieldLens operates strictly under a local-first, zero-telemetry architecture.</p>
+        </div>
+
+        <div class="card card-privacy-box">
+          <h3>🔒 Privacy Principles</h3>
+          <ul class="privacy-list">
+            <li><strong>Local Analysis Only:</strong> 100% of link hover analysis, file type verification, and intent tracking is executed locally on your device inside the extension Service Worker.</li>
+            <li><strong>Zero Remote Transmission:</strong> No browsing URLs, history, download metadata, or personal data are ever sent to remote servers.</li>
+            <li><strong>Zero Sensitive Data Capture:</strong> Form inputs, passwords, messages, and personal information are strictly ignored.</li>
+            <li><strong>Transient Intent Memory:</strong> User click gesture contexts are stored temporarily in volatile memory and automatically discarded after 5-10 seconds.</li>
+          </ul>
+        </div>
+
+        <div class="card danger-card">
+          <h3>Local History Purge</h3>
+          <p>Clear all locally persisted security activity logs and daily statistics stored in <code>chrome.storage.local</code>.</p>
+          <button id="btn-purge-history" class="btn btn-danger">Purge All Local Security Logs</button>
+        </div>
+      </section>
+
+      <!-- Section 4: Security Activity Logs -->
+      <section id="tab-logs" class="tab-page">
+        <div class="page-header">
+          <div class="header-split">
+            <div>
+              <h2>Security Activity Logs</h2>
+              <p>Historical audit trail of detected risks and user actions.</p>
+            </div>
+            <button id="btn-export-logs" class="btn btn-secondary">Export JSON</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="table-container">
+            <table class="logs-table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Event Type</th>
+                  <th>Domain / Source</th>
+                  <th>Target</th>
+                  <th>Risk Score</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="logs-tbody">
+                <!-- Dynamic log rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

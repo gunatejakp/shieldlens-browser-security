@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShieldLens Security Dashboard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-shield">🛡️</div>
+        <div>
+          <h1 class="brand-title">SHIELDLENS</h1>
+          <div class="brand-tagline">Cybersecurity & Download Guard</div>
+        </div>
+      </div>
+      <div id="status-badge" class="status-badge badge-green">
+        <span class="dot"></span>
+        <span id="status-text">Protected</span>
+      </div>
+    </header>
+
+    <!-- Protection Modules Switch Grid -->
+    <section class="modules-section">
+      <h2 class="section-title">ACTIVE PROTECTION MODULES</h2>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-info">
+            <span class="module-icon">🔍</span>
+            <div>
+              <div class="module-name">HoverGuard</div>
+              <div class="module-desc">Pre-Click Link Analysis</div>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-hover-guard" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="module-card">
+          <div class="module-info">
+            <span class="module-icon">📁</span>
+            <div>
+              <div class="module-name">FileGuard</div>
+              <div class="module-desc">Expected File Verification</div>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-file-guard" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="module-card">
+          <div class="module-info">
+            <span class="module-icon">🚨</span>
+            <div>
+              <div class="module-name">Download Guard</div>
+              <div class="module-desc">Unauthorized Download Detection</div>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle-download-guard" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics-section">
+      <div class="metric-card">
+        <div class="metric-val" id="events-count">0</div>
+        <div class="metric-label">Security Events Today</div>
+      </div>
+    </section>
+
+    <!-- Recent Security Activity Feed -->
+    <section class="activity-section">
+      <div class="activity-header">
+        <h2 class="section-title">RECENT ACTIVITY</h2>
+        <button id="btn-clear-feed" class="text-btn">Clear</button>
+      </div>
+      <div id="activity-list" class="activity-list">
+        <div class="empty-state">
+          <div class="empty-icon">🛡️</div>
+          <div>No security alerts detected today</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Actions -->
+    <footer class="footer">
+      <button id="btn-open-test" class="btn btn-secondary">
+        <span>🧪</span> Test Playground
+      </button>
+      <button id="btn-open-options" class="btn btn-primary">
+        <span>⚙️</span> Settings & Privacy
+      </button>
+    </footer>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

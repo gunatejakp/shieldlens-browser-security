@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShieldLens Security Interactive Test Laboratory</title>
+  <link rel="stylesheet" href="test-playground.css">
+</head>
+<body>
+  <div class="test-container">
+    <header class="test-header">
+      <div class="brand">
+        <span class="logo">🧪</span>
+        <div>
+          <h1>SHIELDLENS TEST PLAYGROUND</h1>
+          <p>Interactive verification suite for all 18 cybersecurity test scenarios</p>
+        </div>
+      </div>
+      <div class="notice-badge">
+        <span>🔒 Harmless Test Scenarios — No Real Malware</span>
+      </div>
+    </header>
+
+    <!-- Category 1: HoverGuard Pre-Click Link Tests -->
+    <section class="test-card">
+      <h2 class="card-title">🔍 FEATURE 1 — HOVERGUARD LINK ANALYSIS TESTS</h2>
+      <p class="card-desc">Hover your mouse over the links below to inspect ShieldLens pre-click risk indicators & tooltips.</p>
+      
+      <div class="test-grid">
+        <div class="test-item">
+          <div class="test-label">Test 1: Normal Safe HTTPS Link</div>
+          <a href="https://example.com/safe-article" class="test-link">https://example.com/safe-article</a>
+          <span class="expected-tag tag-green">Expected: 🟢 LOW RISK</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 2: Unencrypted HTTP Link</div>
+          <a href="http://example.com/login" class="test-link">http://example.com/login</a>
+          <span class="expected-tag tag-amber">Expected: 🟡 MEDIUM RISK (HTTP)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 3: Suspiciously Long URL</div>
+          <a href="https://example.com/path/to/resource/deep/dir/auth/session/token?query=1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdef" class="test-link">Long URL Example (>150 chars)</a>
+          <span class="expected-tag tag-amber">Expected: 🟡 MEDIUM RISK (Length)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 4: URL Shortener Pattern</div>
+          <a href="https://bit.ly/3xYzExample" class="test-link">https://bit.ly/3xYzExample</a>
+          <span class="expected-tag tag-amber">Expected: 🟡 MEDIUM RISK (Shortener)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 5: Embedded Multiple Redirect Query</div>
+          <a href="https://redirect-service.com/goto?url=https://another-domain.com/landing?dest=https://final-dest.com" class="test-link">Multiple Redirect Query Link</a>
+          <span class="expected-tag tag-amber">Expected: 🟡 MEDIUM RISK (Redirect Params)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 6: Punycode / IDN Spoofing Domain</div>
+          <a href="http://xn--80ak6aa92e.com/test" class="test-link">http://xn--80ak6aa92e.com/test</a>
+          <span class="expected-tag tag-red">Expected: 🔴 HIGH RISK (Punycode IDN)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 7: Lookalike / Typosquatting Domain</div>
+          <a href="http://paypa1-security-update.com/verify" class="test-link">http://paypa1-security-update.com/verify</a>
+          <span class="expected-tag tag-red">Expected: 🔴 HIGH RISK (Typosquatting)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 8: IP Address Hostname</div>
+          <a href="http://192.168.1.1/admin/login" class="test-link">http://192.168.1.1/admin/login</a>
+          <span class="expected-tag tag-red">Expected: 🔴 HIGH RISK (IP Address Host)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 2: FileGuard Expected vs Actual Tests -->
+    <section class="test-card">
+      <h2 class="card-title">📁 FEATURE 2 — FILEGUARD EXPECTED VS ACTUAL VERIFICATION</h2>
+      <p class="card-desc">Click the buttons below to trigger simulated harmless blob downloads and verify expected vs actual matching.</p>
+      
+      <div class="test-grid">
+        <div class="test-item">
+          <div class="test-label">Test 9: Normal Safe PDF Download</div>
+          <button id="btn-dl-pdf" class="btn btn-test">Download AnnualReport.pdf</button>
+          <span class="expected-tag tag-green">Expected: 🟢 MATCH (PDF)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 10: Normal Safe Image Download</div>
+          <button id="btn-dl-img" class="btn btn-test">Download Photo.jpg</button>
+          <span class="expected-tag tag-green">Expected: 🟢 MATCH (JPG Image)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 11: Normal Safe Audio Download</div>
+          <button id="btn-dl-audio" class="btn btn-test">Download Track.mp3</button>
+          <span class="expected-tag tag-green">Expected: 🟢 MATCH (MP3 Audio)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 12: Normal Safe Video Download</div>
+          <button id="btn-dl-video" class="btn btn-test">Download Presentation.mp4</button>
+          <span class="expected-tag tag-green">Expected: 🟢 MATCH (MP4 Video)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 13: Normal Safe Archive Download</div>
+          <button id="btn-dl-zip" class="btn btn-test">Download ProjectBackup.zip</button>
+          <span class="expected-tag tag-green">Expected: 🟢 MATCH (ZIP Archive)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 14: File Mismatch (Promised PDF -> Actual Executable)</div>
+          <button id="btn-dl-mismatch-exe" class="btn btn-test">Download LectureNotes.pdf</button>
+          <span class="expected-tag tag-red">Expected: 🔴 MISMATCH ALERT (Executable)</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 15: Double Extension Disguise (Notes.pdf.exe)</div>
+          <button id="btn-dl-double-ext" class="btn btn-test">Download StudyGuide.pdf.exe</button>
+          <span class="expected-tag tag-red">Expected: 🔴 DOUBLE EXTENSION ALERT</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 16: Category Mismatch (Promised JPG -> Actual ZIP)</div>
+          <button id="btn-dl-mismatch-zip" class="btn btn-test">Download ProfilePic.jpg</button>
+          <span class="expected-tag tag-amber">Expected: 🟡 CATEGORY MISMATCH (ZIP)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category 3: Background Download Guard Intent Tests -->
+    <section class="test-card">
+      <h2 class="card-title">🚨 FEATURE 3 — BACKGROUND DOWNLOAD GUARD TESTS</h2>
+      <p class="card-desc">Test intent correlation logic under drive-by, automatic, and unexpected click conditions.</p>
+
+      <div class="test-grid">
+        <div class="test-item">
+          <div class="test-label">Test 17: Unexpected Download (Click "Play Video" -> .exe starts)</div>
+          <button id="btn-unrelated-click" class="btn btn-test" style="background: #3b82f6;">▶ Play HD Video</button>
+          <span class="expected-tag tag-red">Expected: 🔴 UNEXPECTED DOWNLOAD ALERT</span>
+        </div>
+
+        <div class="test-item">
+          <div class="test-label">Test 18: Automatic Drive-by Download (No Click)</div>
+          <button id="btn-trigger-auto-dl" class="btn btn-test" style="background: #dc2626;">Trigger Drive-by Download in 3s</button>
+          <span class="expected-tag tag-red">Expected: 🔴 AUTOMATIC DRIVE-BY ALERT</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="test-playground.js"></script>
+</body>
+</html>
